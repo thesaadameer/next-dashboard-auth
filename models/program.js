@@ -14,6 +14,5 @@ const programSchema = new Schema(
   { timestamps: true }
 );
 
-const Program =
-  mongoose.model.program || mongoose.model("program", programSchema);
+const Program = models.program || mongoose.model("program", programSchema);
 export default Program;

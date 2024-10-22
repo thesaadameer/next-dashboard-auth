@@ -1,3 +1,4 @@
+// middleware.js
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
@@ -18,7 +19,6 @@ export async function middleware(req) {
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
   }
-
   // If token has expired, return a 401 Unauthorized response
   const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
   if (token.exp && token.exp < currentTime) {
@@ -28,7 +28,6 @@ export async function middleware(req) {
   // Role-based access for dashboard paths
   if (pathname.startsWith("/dashboard")) {
     const role = token.role;
-
     if (role === "admin" && pathname.includes("/admin")) {
       return NextResponse.next();
     } else if (role === "instructor" && pathname.includes("/instructor")) {

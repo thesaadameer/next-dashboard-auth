@@ -4,69 +4,55 @@ import Sidebar from "../../../components/Sidebar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function StudentDashboard() {
-  const [courses, setCourses] = useState([]);
-  const [metrics, setMetrics] = useState({});
-  const [dailyRevenue, setDailyRevenue] = useState([]);
-  const [recentOrders, setRecentOrders] = useState([]);
+export default function StudentPrograms() {
+  const [programs, setPrograms] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchPrograms() {
       try {
-        const metricsResponse = await axios.get("/api/dashboard/metrics");
-        setMetrics(metricsResponse.data);
-
-        const dailyRevenueResponse = await axios.get(
-          "/api/dashboard/daily-revenue"
-        );
-        setDailyRevenue(dailyRevenueResponse.data);
-
-        const recentOrdersResponse = await axios.get(
-          "/api/dashboard/recent-orders"
-        );
-        setRecentOrders(recentOrdersResponse.data);
+        const res = await axios.get("/api/student/programs");
+        setPrograms(res.data);
       } catch (error) {
-        console.error("Error fetching dashboard data:", error);
+        console.error("Error fetching programs:", error);
+      } finally {
+        setLoading(false);
       }
     }
 
-    fetchData();
+    fetchPrograms();
   }, []);
 
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 p-4">
-        {/* Top Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="p-4 bg-white shadow rounded-lg">
-            <h2 className="text-xl font-bold">${metrics.dailyRevenue}</h2>
-            <p>Daily Revenue</p>
-          </div>
-          <div className="p-4 bg-white shadow rounded-lg">
-            <h2 className="text-xl font-bold">${metrics.ytdRevenue}</h2>
-            <p>YTD Revenue</p>
-          </div>
-          <div className="p-4 bg-white shadow rounded-lg">
-            <h2 className="text-xl font-bold">{metrics.totalCustomers}</h2>
-            <p>Customers</p>
-          </div>
-        </div>
+      <div className="flex-1 ml-48 p-4">
+        <h1 className="text-2xl font-bold mb-4">Available Programs</h1>
 
-        {/* Chart and Recent Orders */}
-        <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* You can add BarChart here to visualize daily revenue */}
-          <div className="p-4 bg-white shadow rounded-lg">
-            <h2 className="text-xl font-bold">Recent Orders</h2>
-            <ul>
-              {recentOrders.map((order, index) => (
-                <li key={index} className="border-b p-2">
-                  {order.student.name} - ${order.amount}
-                </li>
-              ))}
-            </ul>
+        {loading ? (
+          // Loader UI using Tailwind CSS
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {programs.map((program) => (
+              <div
+                key={program._id}
+                className="p-6 bg-white shadow rounded-lg hover:bg-blue-100 transition-shadow cursor-pointer space-y-2"
+              >
+                <h2 className="text-xl font-bold">{program.name}</h2>
+                <p>{program.description}</p>
+                <a
+                  href={`/dashboard/student/programs/${program._id}`}
+                  className="mt-4 inline-block text-blue-500 hover:underline"
+                >
+                  View Courses
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

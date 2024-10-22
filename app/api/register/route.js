@@ -1,3 +1,5 @@
+// app/api/register/route.js
+
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";

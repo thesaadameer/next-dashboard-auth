@@ -24,7 +24,7 @@ const ManageInstructors = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 p-4">
+      <div className="flex-1 ml-48 p-4">
         <h2 className="text-2xl font-semibold mb-4">Manage Instructors</h2>
         <div className="w-full m-auto p-4 border rounded-lg bg-white overflow-y-auto">
           <div className="my-3 p-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 items-center justify-between cursor-pointer">

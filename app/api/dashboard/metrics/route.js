@@ -1,5 +1,7 @@
+// app/api/dashboard/metrics/route.js
+
 import dbConnect from "@/lib/mongodb";
-import Sale from "@/models/sale";
+import Sale from "@/models/order";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 

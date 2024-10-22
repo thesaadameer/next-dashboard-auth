@@ -1,21 +1,8 @@
 import mongoose, { Schema, models } from "mongoose";
 import User from "./user";
 
-const userSchema = new Schema(
+const instructorSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -38,5 +25,5 @@ const userSchema = new Schema(
 );
 
 const Instructor =
-  mongoose.models.instructor || mongoose.model("instructor", instructorSchema);
+  models.instructor || mongoose.model("instructor", instructorSchema);
 export default Instructor;

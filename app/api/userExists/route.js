@@ -1,3 +1,6 @@
+
+// app/api/userExists/route.js
+
 import dbConnect from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextResponse } from "next/server";

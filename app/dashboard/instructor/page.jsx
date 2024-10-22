@@ -36,7 +36,7 @@ export default function InstructorDashboard() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 p-4">
+      <div className="flex-1 ml-48 p-4">
         <TopCards
           dailyRevenue={dailyRevenue}
           ytdRevenue={ytdRevenue}

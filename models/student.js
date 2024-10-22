@@ -1,6 +1,6 @@
 import mongoose, { Schema, models } from "mongoose";
 import User from "./user";
-import Sale from "./sale";
+import Sale from "./order";
 
 const studentSchema = new Schema(
   {

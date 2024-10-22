@@ -1,3 +1,6 @@
+
+// components/BarChart.jsx
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";

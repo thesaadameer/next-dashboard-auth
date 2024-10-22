@@ -1,6 +1,6 @@
 // app/api/instructor/dashboard/route.js
 import dbConnect from "@/lib/mongodb";
-import Sale from "@/models/sale";
+import Sale from "@/models/order";
 import Course from "@/models/course";
 import { NextResponse } from "next/server";
 

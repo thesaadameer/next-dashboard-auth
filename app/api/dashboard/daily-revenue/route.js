@@ -1,5 +1,7 @@
+// app/api/dashboard/daily-revenue/route.js
+
 import dbConnect from "@/lib/mongodb";
-import Sale from "@/models/sale";
+import Sale from "@/models/order";
 import { NextResponse } from "next/server";
 
 export async function GET() {

@@ -1,15 +1,13 @@
 import mongoose, { Schema, models } from "mongoose";
-import User from "./user";
-import Course from "./course";
 
-const saleSchema = new Schema(
+const orderSchema = new Schema(
   {
-    course: {
+    course_id: {
       type: Schema.Types.ObjectId,
       ref: "course",
       required: true,
     },
-    student: {
+    student_id: {
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
@@ -20,19 +18,17 @@ const saleSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["paid", "unpaid", "pending", "expired"],
+      enum: ["PAID", "UNPAID", "FAILED"],
+      default: "UNPAID",
       required: true,
     },
-    purchaseDate: {
+    craeted_at: {
       type: Date,
       default: Date.now,
-    },
-    expiryDate: {
-      type: Date,
     },
   },
   { timestamps: true }
 );
 
-const Sale = mongoose.models.sale || mongoose.model("sale", saleSchema);
-export default Sale;
+const Order = mongoose.models.order || mongoose.model("order", orderSchema);
+export default Order;
